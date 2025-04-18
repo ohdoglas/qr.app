@@ -2,7 +2,7 @@ import QRCode  from "qrcode";
 import fs from "fs";
 import path from "path";
 
-var options: QRCode.QRCodeToDataURLOptionsOther = {
+const options: QRCode.QRCodeToDataURLOptionsOther = {
     errorCorrectionLevel: 'H',
     type: 'image/png',
     margin: 1,
