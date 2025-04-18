@@ -139,3 +139,4 @@ dist
 #prisma client data
 /data
 prisma/migrations/
+src/generated/
