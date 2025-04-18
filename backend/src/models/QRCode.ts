@@ -76,4 +76,15 @@ export default class QRCode {
         }
     }
 
+    toJSON() {
+        return {
+            id: this.id,
+            url: this.url,
+            imageUrl: this.imageUrl,
+            base64: this.base64,
+            createdAt: this.createdAt,
+            private: this.private,
+            scanCount: this.scanCount
+        };
+    }
 }
