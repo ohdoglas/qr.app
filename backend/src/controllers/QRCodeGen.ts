@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import QRCodeService from "../service/QRCode";
+import QRCodeService from "../service/QRCodeGenerator";
 
 
 export default class QRCodeGen {

@@ -15,9 +15,6 @@ const options: QRCode.QRCodeToDataURLOptionsOther = {
 export default class QRCodeService {
     async generateQRCode(url: string) {
         try {
-            if (typeof url !== "string" || !url.startsWith("http")) {
-                throw new Error("Invalid URL");
-            };
             console.log("Generating QR code for URL (service): ", url);
 
             const QRResponse = await QRCode.toDataURL(url, options);
@@ -27,8 +24,6 @@ export default class QRCodeService {
             const base64Data = QRResponse.replace(/^data:image\/png;base64,/, "");
 
             fs.writeFileSync(filePath, base64Data, 'base64');
-
-            console.log("QRCode saved on: ", filePath);
 
             return QRResponse;
         } catch (error) {

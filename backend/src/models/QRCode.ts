@@ -62,7 +62,7 @@ export default class QRCode {
         }
     }
 
-    static async updateField(id: string, data: Partial<TQRCode>) {
+    static async updateFields(id: string, data: Partial<TQRCode>) {
         try {
             const updateQRCode = await prisma.qRCode.update({
                 where: { id: id },
