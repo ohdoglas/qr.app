@@ -38,8 +38,3 @@ export async function isMaliciousURL(url: string): Promise<boolean> {
         return false;
     }
 }
-
-(async () => {
-    const result = await isMaliciousURL("https://www.google.com.br");
-    console.log("É maliciosa?", result);
-})();
