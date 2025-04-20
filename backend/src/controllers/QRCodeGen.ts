@@ -1,22 +1,31 @@
 import { Request, Response } from "express";
-
 import QRCodeService from "../service/QRCodeGenerator";
-
+import SERVER from "../utils/messages/serverMessages";
+import QRCodeC from "../models/QRCode";
+import QRCODEMSG from "../utils/messages/qrCodeMessages";
 
 export default class QRCodeGen {
     async controller(req: Request, res: Response) {
-        const { url } = req.body;
+        const { url, isPrivate } = req.body;
         try {
             const QRCodeGenerator = new QRCodeService()
             const response = await QRCodeGenerator.generateQRCode(url);
 
+            if (isPrivate) {
+                const data = {
+                    private: isPrivate
+                }
+
+                await QRCodeC.updateFields(response.id, data);
+            }
+
             return res.status(200).json({
-                QRCode: response
+                message: QRCODEMSG.SUCCESS.QRCODE_CREATED_SUCCESSFULLY
             });
         } catch (error) {
             console.error(error);
             return res.status(500).json({
-                message: `Internal Server Error: ${error}`
+                message: SERVER.ERR.INTERNAL_SERVER_ERROR(error)
             });
         }
     }

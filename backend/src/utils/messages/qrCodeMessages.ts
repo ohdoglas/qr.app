@@ -13,11 +13,9 @@ const QRCODEMSG = {
         MALICIOUS_BY_SAFE_BROWSING: "Unsafe URL detected. This link has been flagged as malicious by Google Safe Browsing. Please use a trusted and verified URL.",
         UNSAFE_URL_DETECTED: "This URL looks unsafe and may contain malicious content. Please use a clean and secure link.",
 
-
-
     },
     SUCCESS: {
-
+        QRCODE_CREATED_SUCCESSFULLY: "Operation completed. QR Code created successfully."
     }
 }
 

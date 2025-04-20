@@ -1,6 +1,7 @@
 import QRCode  from "qrcode";
-import fs from "fs";
-import path from "path";
+import QRCodeC, { } from "../models/QRCode"
+import { imgUp } from "../utils/imgUpload";
+import supabase from "../config/supabase";
 
 const options: QRCode.QRCodeToDataURLOptionsOther = {
     errorCorrectionLevel: 'H',
@@ -18,14 +19,35 @@ export default class QRCodeService {
             console.log("Generating QR code for URL (service): ", url);
 
             const QRResponse = await QRCode.toDataURL(url, options);
-
-            const filePath = path.join(__dirname, "../public/generatedQRCode/QRCode.png");
-
             const base64Data = QRResponse.replace(/^data:image\/png;base64,/, "");
+            const buffer = Buffer.from(base64Data, "base64");
 
-            fs.writeFileSync(filePath, base64Data, 'base64');
+            const fileName = `QRCode_${Date.now()}.png`;
+            const uploadPath = `QRCodeImage/${fileName}`;
 
-            return QRResponse;
+            const uploadedImg = await imgUp(uploadPath, buffer, "image/png");
+
+            if (!uploadedImg) {
+                throw new Error("Error while updating image on supabase bucket.");
+            };
+
+            const { data } = supabase.storage.from("qrappqrcodes").getPublicUrl(uploadedImg.fullPath);
+
+            const qrCodeData = {
+                url,
+                base64: QRResponse,
+                imageUrl: data.publicUrl
+            };
+
+            const  savedQrCode = await QRCodeC.create(qrCodeData);
+
+            const qrCodeImg = {
+                imageUrl: savedQrCode.imageUrl as string
+            }
+
+            await QRCodeC.updateFields(savedQrCode.id, qrCodeImg)
+
+            return savedQrCode;
         } catch (error) {
             console.error(`Error generating QRCode: ${error}`);
             throw error;

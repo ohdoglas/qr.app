@@ -12,7 +12,7 @@ import hasDangerouChars from "../utils/validators/URLHasDangerousChars";
 
 export default class QRCodeGenMiddleware {
     async authenticate(req: Request, res: Response, next: NextFunction) {
-        const { url } = req.body;
+        const { url, isPrivate } = req.body;
         try {
             if (!url) {
                 return res.status(400).json({

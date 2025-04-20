@@ -3,7 +3,7 @@ import TQRCode from "../types/TQRCode";
 import { v4 as uuidv4 } from "uuid";
 
 
-export default class QRCode {
+export default class QRCodeC {
     id: string;
     url: string;
     imageUrl?: string;
@@ -20,6 +20,33 @@ export default class QRCode {
         this.createdAt = props.createdAt || new Date();
         this.private = props.private ?? false;
         this.scanCount = props.scanCount ?? 0;
+    }
+
+    static async create(data: {
+        url: string,
+        base64: string,
+        imageUrl: string
+    }) {
+        try {
+            const qrCode = new QRCodeC({
+                id: uuidv4(),
+                url: data.url,
+                imageUrl:data.imageUrl,
+                base64: data.base64,
+                createdAt: new Date(),
+                private: false,
+                scanCount: 0
+            });
+
+            const qrCodeData = await prisma.qRCode.create({
+                data: qrCode
+            });
+
+            return qrCodeData;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`Error while inserting new QRCode data on database: ${error}`);
+        }
     }
 
     static async isPrivate(id: string) {
