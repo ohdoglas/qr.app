@@ -1,0 +1,103 @@
+@import url(../reset.css);
+@import url(../global.css);
+@import url(../variables.css);
+
+.main_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 48px;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--nav-color);
+    color: var(--button-font-color);
+
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.footer_icon_left,
+.footer_icon_right {
+    padding: 0px;
+    margin: 0px;
+    width: 64px;
+}
+
+.footer_icon_left_img {
+    background-image: url(../../assets/thumbs/github.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 75.2px;
+    height: 55.53px;
+    border-radius: 0px;
+}
+
+.footer_icon_right_img {
+    background-image: url(../../assets/thumbs/linkedin.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 75.2px;
+    height: 55.53px;
+    border-radius: 0px;
+}
+
+.footer_center {
+    display: flex;
+    flex-direction: column;
+    width: 128px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.footer_center a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_icon_center_img {
+    background-image: url(../../assets/qrAppLogo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 75.2px;
+    height: 55.53px;
+    border-radius: 0px;
+}
+
+.footer_icon_left:hover,
+.footer_icon_right:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.footer_center a div:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.icon_text {
+    padding: 8px;
+}
+
+.icon_text:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
