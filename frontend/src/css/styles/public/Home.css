@@ -6,14 +6,26 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+}
+
+.page-one {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .main_content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    position: relative;
     background-color: var(--button-font-color);
+    overflow: hidden;
 }
 
 .main_content_img {
@@ -39,7 +51,7 @@ html, body {
     align-items: center;
     text-align: center;
 
-    padding: 111px;
+    padding: 32px;
 }
 
 .main_content_title {

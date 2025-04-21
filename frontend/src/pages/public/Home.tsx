@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Home: React.FC = () => {
     // const navigate = useNavigate();
     return (
-        <body className="page-one">
+        <div className="page-one">
             <Header />
             <main className="main_content">
                 <div className="main_content_img"></div>
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
                 </div>
             </main>
             <Footer />
-        </body>
+        </div>
     )
 }
 
