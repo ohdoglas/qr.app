@@ -11,9 +11,9 @@ const Header: React.FC = () => {
             </nav>
             <div className="header_nav_buttons">
                 <Link to={"/generator"}> <button className="header_nav_gen_button">
-                    GENERATE QRCode</button> </Link>
+                    GENERATE</button> </Link>
                     <Link to={"/about"}> <button className="header_nav_about_button">
-                    ABOUT QRApp</button> </Link>
+                    ABOUT</button> </Link>
             </div>
         </header>
     )
