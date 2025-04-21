@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/header";
 import "../../css/styles/public/Home.css";
+import Footer from "../components/footer";
 // import { useNavigate } from "react-router-dom";
 
 
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
                     <h1>QRAPP API - W.I.P</h1>
                 </div>
             </main>
+            <Footer />
         </body>
     )
 }
