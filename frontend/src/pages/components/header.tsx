@@ -7,9 +7,7 @@ const Header: React.FC = () => {
         <header className="header">
             <nav className="header_nav">
                 <div className="header_nav_logo">
-                <Link to={"/"}><div className="header_nav_logo_img"></div></Link>
-                {/* <Link to={"/"}> <h2 className="header_nav_logo_name">QR.App</h2> </Link> */}
-                </div>
+                <Link to={"/"}><div className="header_nav_logo_img"></div></Link>                </div>
             </nav>
             <div className="header_nav_buttons">
                 <Link to={"/generator"}> <button className="header_nav_gen_button">
