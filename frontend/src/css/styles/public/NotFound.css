@@ -1,0 +1,79 @@
+@import url(../../reset.css);
+@import url(../../global.css);
+@import url(../../variables.css);
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main_content {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--button-font-color);
+}
+
+.main_content_404_img {
+    background-image: url(../../../assets/404.png);
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+
+    opacity: 0.2;
+}
+
+.main_content div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 32px;
+}
+
+.main_content_title {
+    padding:  8px;
+    z-index: 1000;
+
+    color: var(--button-back-color);
+}
+
+.main_content_subtitle {
+    padding: 8px;
+    width: 1000px;
+
+    z-index: 1000;
+    color: var(--button-back-color);
+}
+
+.main_content_button {
+    padding: 48px;
+    text-decoration: none;
+
+    font-size: 32px;
+
+    color: var(--button-back-color);
+    background-color: var(--button-color);
+    border: 5px solid var(--button-color-hard);
+}
+
+.main_content_button:hover {
+    background-color: var(--button-color-hard);
+    border: 5px solid var(--button-color);
+
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
