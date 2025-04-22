@@ -18,6 +18,28 @@ html, body {
     background-color: var(--button-font-color);
 }
 
+.main_content_section div {
+    padding: 32px;
+
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+.main_content_section div::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: -2;
+    border-radius: 12px;
+}
+
+.main_content_section > * {
+    position: relative;
+    z-index: 0;
+}
+
 .main_content_img {
     background-image: url(../../../assets/qr-code-vector.jpg);
 

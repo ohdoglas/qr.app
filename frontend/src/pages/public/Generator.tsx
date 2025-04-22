@@ -42,13 +42,13 @@ const Generator: React.FC = () => {
             <Header />
             <main className="main_content">
                 <div className="main_content_img"></div>
+                    <div className="main_content_section">
                 <div className="main_content_title_div">
                     <h1 className="main_content_title">Generate your QR Code</h1>
                     <h3 className="main_content_subtitle">
                         Enter a URL, choose visibility, and create your QR code instantly.
                     </h3>
 
-                    <div className="main_content_section">
                     <section className="generated_qrcode">
                         {message && <p>{message}</p>}
                         {imageUrl && (
