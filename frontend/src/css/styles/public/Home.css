@@ -6,14 +6,14 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .page-one {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .main_content {
@@ -25,7 +25,7 @@ html, body {
 
     position: relative;
     background-color: var(--button-font-color);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .main_content_img {
@@ -69,18 +69,18 @@ html, body {
     color: var(--button-back-color);
 }
 
-.main_content_button {
-    padding: 48px;
+.home_button {
+    padding: 24px;
     text-decoration: none;
 
-    font-size: 32px;
+    font-size: 24px;
 
     color: var(--button-back-color);
     background-color: var(--button-color);
     border: 5px solid var(--button-color-hard);
 }
 
-.main_content_button:hover {
+.home_button:hover {
     background-color: var(--button-color-hard);
     border: 5px solid var(--button-color);
 

@@ -17,7 +17,7 @@ const Home: React.FC = () => {
                     <h1 className="main_content_title">Welconme to QR.App</h1>
                     <h3 className="main_content_subtitle">Turn any link into a QR Code in seconds.</h3>
                     <div className="main_content_section">
-                        <Link to={"/generator"}>  <button className="main_content_button">GENERATE QRCODE</button></Link>
+                        <Link to={"/generator"}>  <button className="home_button">GENERATE QRCODE</button></Link>
                     </div>
                 </div>
             </main>

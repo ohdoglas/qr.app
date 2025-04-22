@@ -57,18 +57,18 @@ html, body {
     color: var(--button-back-color);
 }
 
-.main_content_button {
-    padding: 48px;
+.not_found_button {
+    padding: 32px;
     text-decoration: none;
 
-    font-size: 32px;
+    font-size: 24px;
 
     color: var(--button-back-color);
     background-color: var(--button-color);
     border: 5px solid var(--button-color-hard);
 }
 
-.main_content_button:hover {
+.not_found_button:hover {
     background-color: var(--button-color-hard);
     border: 5px solid var(--button-color);
 

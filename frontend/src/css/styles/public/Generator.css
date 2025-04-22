@@ -83,18 +83,18 @@ html, body {
 
 }
 
-.main_content_button {
-    padding: 48px;
+.generator_button {
+    padding: 24px;
     text-decoration: none;
 
-    font-size: 32px;
+    font-size: 24px;
 
     color: var(--button-back-color);
     background-color: var(--button-color);
     border: 5px solid var(--button-color-hard);
 }
 
-.main_content_button:hover {
+.generator_button:hover {
     background-color: var(--button-color-hard);
     border: 5px solid var(--button-color);
 

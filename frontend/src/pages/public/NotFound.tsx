@@ -19,7 +19,7 @@ const NotFound: React.FC = () => {
                     It might have been moved, deleted, or never existed.
                     </h1>
                 </div>
-                <Link to={"/generator"}>  <button className="main_content_button">Back to QR.App</button></Link>
+                <Link to={"/"}>  <button className="not_found_button">Back to QR.App</button></Link>
                 <div className="main_content_404_img">
                 </div>
             </div>

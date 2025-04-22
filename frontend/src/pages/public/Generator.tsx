@@ -3,6 +3,7 @@ import Header from "../components/header";
 import "../../css/styles/public/Generator.css";
 import { generateQRCode } from "../../services/qrcode";
 import { AxiosError } from "axios";
+import qrCodeError from "../../assets/qrcode-error.png";
 
 const Generator: React.FC = () => {
     const [privacy, setPrivacy] = useState<number>(0);
@@ -26,12 +27,13 @@ const Generator: React.FC = () => {
             }
         } catch (error: unknown) {
             const axiosError = error as AxiosError<{ message: string }>;
+
             if (axiosError.response && axiosError.response.data) {
                 setMessage(axiosError.response.data.message);
             } else {
-                setMessage("Erro ao gerar QR Code.");
+                setMessage("An unexpected error occurred while trying to generate the QR Code. Please try again later. If the problem persists, please contact support.");
             }
-            setImageUrl(null);
+            setImageUrl(qrCodeError);
         }
     };
 
@@ -43,7 +45,7 @@ const Generator: React.FC = () => {
                 <div className="main_content_title_div">
                     <h1 className="main_content_title">Generate your QR Code</h1>
                     <h3 className="main_content_subtitle">
-                        Enter a URL, choose visibility, and create your custom QR code instantly.
+                        Enter a URL, choose visibility, and create your QR code instantly.
                     </h3>
 
                     <div className="main_content_section">
@@ -94,7 +96,7 @@ const Generator: React.FC = () => {
                             </label>
                         </section>
 
-                        <button className="main_content_button" onClick={handleGenerate}>
+                        <button className="generator_button" onClick={handleGenerate}>
                             GENERATE QRCODE
                         </button>
                     </div>
