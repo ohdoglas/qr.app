@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/public/Home";
 import Generator from "./pages/public/Generator";
 import NotFound from "./pages/public/NotFound";
+import About from "./pages/public/About";
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
           <Route>
             <Route path="/" element={<Home />} />
             <Route path="/generator" element={<Generator />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />}/>
           </Route>
         </Routes>
