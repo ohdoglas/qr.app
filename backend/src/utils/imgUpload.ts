@@ -5,12 +5,9 @@ export async function imgUp(
     buffer: Buffer,
     mimeType: string
 ) {
-    const ext = pathWithName.split('.').pop();
-
-    const newName = `${pathWithName.replace(`.${ext}`, "")}_${new Date().getTime()}.${ext}`;
-
-    const { error, data} = await supabase.storage.from('qrappqrcodes').upload(newName, buffer, {
+    const { error, data } = await supabase.storage.from('qrappqrcodes').upload(pathWithName, buffer, {
         contentType: mimeType,
+        upsert: false,
     });
 
     if (error) {
