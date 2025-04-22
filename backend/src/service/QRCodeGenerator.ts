@@ -31,7 +31,7 @@ export default class QRCodeService {
                 throw new Error("Error while updating image on supabase bucket.");
             };
 
-            const { data } = supabase.storage.from("qrappqrcodes").getPublicUrl(uploadedImg.fullPath);
+            const { data } = supabase.storage.from("qrappqrcodes").getPublicUrl(uploadedImg.path);
 
             const qrCodeData = {
                 url,
