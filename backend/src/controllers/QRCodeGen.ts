@@ -18,9 +18,10 @@ export default class QRCodeGen {
 
                 await QRCodeC.updateFields(response.id, data);
             }
+            const imageLink = response.imageUrl
 
             return res.status(200).json({
-                message: QRCODEMSG.SUCCESS.QRCODE_CREATED_SUCCESSFULLY
+                imageLink
             });
         } catch (error) {
             console.error(error);
