@@ -11,7 +11,7 @@ const App: React.FC = () => {
           <Route>
             <Route path="/" element={<Home />} />
             <Route path="/generator" element={<Generator />} />
-            <Route path="/404-not-found" element={<NotFound />}/>
+            <Route path="*" element={<NotFound />}/>
           </Route>
         </Routes>
     </Router>
