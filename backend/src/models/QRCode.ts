@@ -49,6 +49,24 @@ export default class QRCodeC {
         }
     }
 
+    static async findByUrl(url: string) {
+        try {
+            const find = await prisma.qRCode.findFirst({
+                where: { url: url }
+                }
+            );
+
+            if (!find) {
+                return false;
+            }
+
+            return find;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`Error while finding by url: ${error}`);
+        }
+    }
+
     static async isPrivate(id: string) {
 
         try {

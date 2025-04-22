@@ -8,21 +8,31 @@ export default class QRCodeGen {
     async controller(req: Request, res: Response) {
         const { url, isPrivate } = req.body;
         try {
-            const QRCodeGenerator = new QRCodeService()
-            const response = await QRCodeGenerator.generateQRCode(url);
 
-            if (isPrivate) {
-                const data = {
-                    private: isPrivate
+            const existing = await QRCodeC.findByUrl(url);
+            if (!existing || isPrivate) {
+                const QRCodeGenerator = new QRCodeService()
+                const response = await QRCodeGenerator.generateQRCode(url);
+
+                if (isPrivate) {
+                    const data = {
+                        private: isPrivate
+                    }
+
+                    await QRCodeC.updateFields(response.id, data);
                 }
+                const imageLink = response.imageUrl
 
-                await QRCodeC.updateFields(response.id, data);
+                return res.status(200).json({
+                    imageLink
+                });
             }
-            const imageLink = response.imageUrl
 
+            const existingQrCode = existing.imageUrl;
             return res.status(200).json({
-                imageLink
+                imageLink: existingQrCode
             });
+
         } catch (error) {
             console.error(error);
             return res.status(500).json({
