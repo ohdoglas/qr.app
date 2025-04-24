@@ -14,11 +14,11 @@ datasource db {
 }
 
 model QRCode {
-  id        String   @id @default(uuid()) @db.Uuid
-  url       String   @db.Text
-  imageUrl  String?  @db.VarChar(255)
-  base64    String   @db.Text
-  createdAt DateTime @default(now())
-  private   Boolean  @default(false)
-  scanCount Int      @default(0)
+  id         String    @id @default(uuid()) @db.Uuid
+  url        String    @db.Text
+  imageUrl   String?   @db.VarChar(255)
+  base64     String    @db.Text
+  createdAt  DateTime  @default(now())
+  private    Boolean   @default(false)
+  scanCount  Int       @default(0)
 }
