@@ -10,22 +10,33 @@ const Generator: React.FC = () => {
     const [url, setUrl] = useState<string>("");
     const [message, setMessage] = useState<string | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [isQRCodeValid, setIsQRCodeValid] = useState<boolean>(false);
+    const [hasTriedToGenerate, setHasTriedToGenerate] = useState<boolean>(false);
+
 
     const handleGenerate = async () => {
+        setHasTriedToGenerate(true);
         try {
             setMessage("Generating QRCode...");
             setImageUrl(null);
+            setIsQRCodeValid(false);
+
             const isPrivate = privacy === -1 ? true : false;
 
             const response = await generateQRCode(url, isPrivate);
 
             if (response.imageLink) {
                 setImageUrl(response.imageLink);
+                setIsQRCodeValid(true);
                 setMessage("QRCode generated successfully!");
             } else if (response.message) {
                 setMessage(response.message);
+                setImageUrl(qrCodeError);
+                setIsQRCodeValid(false);
             } else {
                 setMessage("Failed to generate QRCode.");
+                setImageUrl(qrCodeError);
+                setIsQRCodeValid(false);
             }
         } catch (error: unknown) {
             const axiosError = error as AxiosError<{ message: string }>;
@@ -35,7 +46,9 @@ const Generator: React.FC = () => {
             } else {
                 setMessage("An unexpected error occurred while trying to generate the QR Code. Please try again later. If the problem persists, please contact support.");
             }
+
             setImageUrl(qrCodeError);
+            setIsQRCodeValid(false);
         }
     };
 
@@ -50,14 +63,36 @@ const Generator: React.FC = () => {
                     <h3 className="main_content_subtitle">
                         Enter a URL, choose visibility, and create your QR code instantly.
                     </h3>
-
                     <section className="generated_qrcode">
                         {message && <p>{message}</p>}
-                        {imageUrl && (
-                            <img src={imageUrl} alt="Generated QR Code" className="qrcode-image" />
+                        {imageUrl && isQRCodeValid ? (
+                            <img
+                                src={imageUrl}
+                                alt="Generated QR Code"
+                                className="qrcode-image"
+                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                onClick={(_e) => {
+                                    const newTab = window.open(imageUrl, "_blank");
+                                    if (!newTab) {
+                                        const link = document.createElement('a');
+                                        link.href = imageUrl;
+                                        link.setAttribute("download", "qrcode.png");
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                    }
+                                }}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        ) : hasTriedToGenerate && (
+                            <img
+                                src={qrCodeError}
+                                alt="QR Code not Generated"
+                                className="qrcode-image"
+                                style={{ cursor: 'default' }}
+                            />
                         )}
                     </section>
-
                         <input
                             type="text"
                             name="url_link"
@@ -67,10 +102,8 @@ const Generator: React.FC = () => {
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                         />
-
                         <section className="main_content_form">
                             <p>QR Code Visibility:</p>
-
                             <label htmlFor="public" className="radio-label">
                                 <input
                                     type="radio"
@@ -83,7 +116,6 @@ const Generator: React.FC = () => {
                                 />
                                 <span>Public</span>
                             </label>
-
                             <label htmlFor="private" className="radio-label">
                                 <input
                                     type="radio"

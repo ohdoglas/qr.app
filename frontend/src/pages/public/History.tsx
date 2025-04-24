@@ -107,7 +107,7 @@ const History: React.FC = () => {
                                         {item.scanCount}
                                     </td>
                                     <td title={item.url}>
-                                        <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                                        <a href={item.url} target="_blank" style={{ color: 'inherit', textDecoration: 'underline' }}>
                                             {item.url.length > 40 ? item.url.slice(0, 37) + "..." : item.url}
                                         </a>
                                     </td>
