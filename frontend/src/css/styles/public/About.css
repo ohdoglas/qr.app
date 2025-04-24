@@ -1,0 +1,276 @@
+@import url(../../reset.css);
+@import url(../../global.css);
+@import url(../../variables.css);
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.about_main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.about_main section {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.about_main_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    background-color: var(--button-font-color);
+}
+
+.about_img {
+    background-image: url(../../../assets/qr-code-vector.jpg);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+
+    opacity: 0.2;
+}
+
+.about_main_content h1 {
+    padding-bottom: 8px;
+    font-size: xx-large;
+    color: var(--button-back-color);
+}
+
+.about_main_content p {
+    font-size: x-large;
+    color: var(--button-back-color);
+}
+
+.about_main_content article {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 32px;
+
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.about_main_content article::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 0;
+    border-radius: 12px;
+}
+
+.about_main_content article > * {
+    position: relative;
+    z-index: 1;
+}
+
+.about_text,
+.what_qrcodes,
+.how_it_works,
+.built_speed {
+    max-width: 100%;
+    margin-right: 32px;
+
+    padding: 24px;
+
+}
+
+.about_qr_app_img {
+    background-image: url(../../../assets/about-qrapp.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.what_qrcodes_img {
+    background-image: url(../../../assets/how-it-works.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.how_it_works_img {
+    background-image: url(../../../assets/qrapp-man.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.built_speed_img {
+    background-image: url(../../../assets/made-speed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.tech_stack {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 32px;
+
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.tech_stack::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 0;
+    border-radius: 12px;
+}
+
+.tech_stack > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+.tech_stack h1 {
+    padding:  8px;
+    z-index: 1000;
+
+    font-size: xx-large;
+    color: var(--button-back-color);
+}
+
+.tech_stack p {
+    padding: 8px;
+    width: 100%;
+
+    font-size: x-large;
+    z-index: 1000;
+    color: var(--button-back-color);
+}
+
+@media (max-width: 786px) {
+    .about_main section {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .about_main_content h1 {
+        padding-bottom: 4px;
+        font-size: small;
+        text-align: center;
+    }
+
+    .about_main_content p {
+        font-size: x-small;
+        text-align: justify;
+    }
+
+    .about_text,
+    .what_qrcodes,
+    .how_it_works,
+    .built_speed {
+    max-width: 100%;
+    margin-right: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    }
+
+    .about_qr_app_img,
+    .what_qrcodes_img,
+    .how_it_works_img,
+    .built_speed_img  {
+        width: 100px;
+        height: 100px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .about_main section {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        padding: 8px;
+    }
+
+    .about_main_content h1 {
+        padding-bottom: 2px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .about_main_content p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        text-align: justify;
+    }
+
+    .about_text,
+    .what_qrcodes,
+    .how_it_works,
+    .built_speed {
+        max-width: 100%;
+        margin-right: 0;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .about_qr_app_img,
+    .what_qrcodes_img,
+    .how_it_works_img,
+    .built_speed_img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+
+

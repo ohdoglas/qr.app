@@ -1,0 +1,122 @@
+@import url(../../reset.css);
+@import url(../../global.css);
+@import url(../../variables.css);
+
+html {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.main_content {
+    position: relative;
+    z-index: 1;
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 8px;
+    background-color: var(--button-font-color);
+    text-align: center;
+}
+
+.main_content_404_img {
+    background-image: url(../../../assets/404.png);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.main_content_title,
+.main_content_subtitle {
+    color: var(--button-back-color);
+    margin: 4px 0;
+    word-break: break-word;
+    max-width: 90vw;
+    z-index: 1;
+}
+
+.main_content_title {
+    font-size: 32px;
+}
+
+.main_content_subtitle {
+    font-size: 24px;
+}
+
+.not_found_button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+
+    color: var(--button-back-color);
+    background-color: var(--button-color);
+    border: 3px solid var(--button-color-hard);
+
+    margin-top: 16px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.not_found_button:hover {
+    background-color: var(--button-color-hard);
+    border-color: var(--button-color);
+    transform: scale(1.05);
+}
+
+@media (max-width: 786px) {
+    .main_content_title {
+        font-size: 1.25rem;
+    }
+
+    .main_content_subtitle {
+        font-size: 0.9rem;
+    }
+
+    .not_found_button {
+        font-size: 0.9rem;
+        padding: 10px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main_content {
+        padding: 12px;
+    }
+
+    .main_content_title {
+        font-size: 1rem;
+        max-width: 95vw;
+    }
+
+    .main_content_subtitle {
+        font-size: 0.8rem;
+        max-width: 95vw;
+    }
+
+    .not_found_button {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+    }
+}

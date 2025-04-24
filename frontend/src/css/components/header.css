@@ -1,0 +1,165 @@
+@import url(../global.css);
+@import url(../reset.css);
+@import url(../variables.css);
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    background-color: var(--nav-color-hard);
+    flex-wrap: wrap;
+}
+
+.header_nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header_nav_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin: 4px;
+    flex: 0 0 auto;
+
+}
+
+.header_nav_logo:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.header_nav_logo_img {
+    background-image: url(../../assets/qrAppLogo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 75.2px;
+    height: 55.53px;
+    min-width: 60px;
+    min-height: 45px;
+    flex-shrink: 0;
+}
+
+.header_nav_buttons {
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+    gap: 8px;
+}
+
+.header_nav_gen_button,
+.header_nav_about_button {
+    padding: 16px;
+    margin: 8px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+}
+
+.header_nav_gen_button:hover,
+.header_nav_about_button:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 786px) {
+    .header {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .header_nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header_nav_buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 0;
+        margin-left: auto;
+    }
+
+    .header_nav_gen_button,
+    .header_nav_about_button {
+        width: auto;
+        box-sizing: border-box;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .header_nav_logo {
+        justify-content: flex-start;
+        margin-right: auto;
+    }
+
+    .header_nav_logo_img {
+        width: 75px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .header_nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header_nav_logo {
+        justify-content: flex-start;
+        margin-right: auto;
+    }
+
+    .header_nav_logo_img {
+        width: 60px;
+        height: auto;
+    }
+
+    .header_nav_buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-left: auto;
+        margin-top: 0;
+    }
+
+    .header_nav_buttons a {
+        padding: 8px 8px;
+        font-size: 13px;
+        width: auto;
+        box-sizing: border-box;
+    }
+
+    .header_nav_gen_button,
+    .header_nav_about_button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+
+
