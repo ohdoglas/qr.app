@@ -9,12 +9,12 @@ const Generator: React.FC = () => {
     const [privacy, setPrivacy] = useState<number>(0);
     const [url, setUrl] = useState<string>("");
     const [message, setMessage] = useState<string | null>(null);
-    // const [qrImageUrl, setQrImageUrl] = useState<string | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
 
     const handleGenerate = async () => {
         try {
             setMessage("Generating QRCode...");
+            setImageUrl(null);
             const isPrivate = privacy === -1 ? true : false;
 
             const response = await generateQRCode(url, isPrivate);
@@ -22,6 +22,8 @@ const Generator: React.FC = () => {
             if (response.imageLink) {
                 setImageUrl(response.imageLink);
                 setMessage("QRCode generated successfully!");
+            } else if (response.message) {
+                setMessage(response.message);
             } else {
                 setMessage("Failed to generate QRCode.");
             }
