@@ -87,7 +87,6 @@ const History: React.FC = () => {
                         <thead>
                             <tr>
                                 <th>QR Code</th>
-                                <th>Scan Count</th>
                                 <th>URL / Name</th>
                                 <th>Created At</th>
                             </tr>
@@ -102,9 +101,6 @@ const History: React.FC = () => {
                                             height={100}
                                             alt="QR Code"
                                         />
-                                    </td>
-                                    <td>
-                                        {item.scanCount}
                                     </td>
                                     <td title={item.url}>
                                         <a href={item.url} target="_blank" style={{ color: 'inherit', textDecoration: 'underline' }}>
