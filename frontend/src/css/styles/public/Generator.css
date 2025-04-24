@@ -73,7 +73,6 @@ html, body {
 
 .main_content_subtitle {
     padding: 8px;
-    width: 1000px;
 
     z-index: 1000;
     color: var(--button-back-color);
@@ -138,3 +137,39 @@ html, body {
     height: 300px;
     object-fit: contain;
 }
+
+
+@media (max-width: 786px) {
+    .main_content_url_input {
+        padding: 8px;
+        margin: 8px;
+
+        width: 248px;
+    }
+
+    .qrcode-image {
+        margin-top: 1rem;
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .main_content_url_input {
+        padding: 8px;
+        margin: 8px;
+
+        width: 100%;
+    }
+
+    .qrcode-image {
+        margin-top: 1rem;
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
+}
+
+

@@ -23,3 +23,7 @@ button {
 button:hover {
     background-color: var(--details-color);
 }
+
+.no-scroll {
+    overflow: hidden;
+}

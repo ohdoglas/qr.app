@@ -63,7 +63,6 @@ html, body {
 
 .main_content_subtitle {
     padding: 8px;
-    width: 1000px;
 
     z-index: 1000;
     color: var(--button-back-color);
