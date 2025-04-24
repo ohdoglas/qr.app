@@ -140,7 +140,7 @@
     }
 
     .header_nav_buttons {
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
         justify-content: flex-end;
         gap: 8px;

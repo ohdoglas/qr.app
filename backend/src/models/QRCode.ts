@@ -132,4 +132,19 @@ export default class QRCodeC {
             scanCount: this.scanCount
         };
     }
+
+    static async showQRCodeHistory() {
+        const history = await prisma.qRCode.findMany({
+            where: {
+                private: false
+            },
+            select: {
+                url: true,
+                imageUrl: true,
+                createdAt: true,
+                scanCount: true
+            }
+        });
+        return history;
+    }
 }

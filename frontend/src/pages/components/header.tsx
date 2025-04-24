@@ -14,6 +14,8 @@ const Header: React.FC = () => {
                     GENERATE</button> </Link>
                     <Link to={"/about"}> <button className="header_nav_about_button">
                     ABOUT</button> </Link>
+                    <Link to={"/history"}> <button className="header_nav_about_button">
+                    HISTORY</button> </Link>
             </div>
             </nav>
         </header>
