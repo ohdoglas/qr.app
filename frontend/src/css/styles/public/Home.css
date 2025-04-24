@@ -6,14 +6,12 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
 }
 
 .page-one {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* overflow: hidden; */
 }
 
 .main_content {
