@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "QRCode" ALTER COLUMN "url" SET DATA TYPE TEXT;
