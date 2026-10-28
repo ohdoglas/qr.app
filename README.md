@@ -2,7 +2,7 @@
 
 QR.APP é um gerador de QR Codes estáticos, sem conta e com processamento local no navegador. Crie códigos para URL, texto, Wi-Fi, e-mail, telefone, SMS, WhatsApp e vCard; ajuste a aparência, confira a prévia e exporte PNG ou SVG.
 
-> **Estado do projeto:** evolução local em andamento na branch `feat/qr-app-2.0`. Ainda não há demonstração pública desta versão. O gerador principal é client-side; `/history` permanece como uma integração legada separada.
+> **Estado do projeto:** evolução em andamento na branch `feature/qr-app-2.0`. Ainda não há demonstração pública desta versão. O gerador principal é client-side; `/history` permanece como uma integração legada separada.
 
 ## O que está disponível
 

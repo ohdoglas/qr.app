@@ -20,6 +20,12 @@ export default class QRCodeGenMiddleware {
                 });
             };
 
+            if (isPrivate !== undefined && typeof isPrivate !== "boolean") {
+                return res.status(400).json({
+                    message: "isPrivate must be a boolean when provided."
+                });
+            }
+
             const sanitized = sanitizeURL(url);
 
             const wasSanitized = sanitized !== url;

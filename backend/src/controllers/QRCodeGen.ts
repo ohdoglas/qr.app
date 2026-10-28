@@ -6,29 +6,22 @@ import QRCODEMSG from "../utils/messages/qrCodeMessages";
 
 export default class QRCodeGen {
     async controller(req: Request, res: Response) {
-        const { url, isPrivate } = req.body;
+        const { url } = req.body;
+        const isPrivate = req.body.isPrivate !== false;
         try {
 
             const existing = await QRCodeC.findByUrl(url);
-            if (!existing || isPrivate) {
+            if (!existing || isPrivate || existing.private || !existing.imageUrl) {
                 const QRCodeGenerator = new QRCodeService()
-                const response = await QRCodeGenerator.generateQRCode(url);
-
-                if (isPrivate) {
-                    const data = {
-                        private: isPrivate
-                    }
-
-                    await QRCodeC.updateFields(response.id, data);
-                }
-                const imageLink = response.imageUrl
+                const response = await QRCodeGenerator.generateQRCode(url, isPrivate);
+                const imageLink = await QRCodeC.getImageUrl(response.imageUrl as string);
 
                 return res.status(200).json({
                     imageLink
                 });
             }
 
-            const existingQrCode = existing.imageUrl;
+            const existingQrCode = await QRCodeC.getImageUrl(existing.imageUrl as string);
             return res.status(200).json({
                 imageLink: existingQrCode
             });

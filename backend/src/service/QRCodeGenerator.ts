@@ -13,7 +13,7 @@ const options: QRCode.QRCodeToDataURLOptionsOther = {
 };
 
 export default class QRCodeService {
-    async generateQRCode(url: string) {
+    async generateQRCode(url: string, isPrivate = true) {
         try {
             console.log("Generating QR code for URL (service): ", url);
 
@@ -27,16 +27,11 @@ export default class QRCodeService {
             const qrCodeData = {
                 url,
                 base64: QRResponse,
-                imageUrl
+                imageUrl,
+                private: isPrivate
             };
 
             const  savedQrCode = await QRCodeC.create(qrCodeData);
-
-            const qrCodeImg = {
-                imageUrl: savedQrCode.imageUrl as string
-            }
-
-            await QRCodeC.updateFields(savedQrCode.id, qrCodeImg)
 
             return savedQrCode;
         } catch (error) {

@@ -8,9 +8,9 @@ import QRCODEMSG from "../utils/messages/qrCodeMessages";
 export default class QRCodeHistoryMiddleware {
     async authenticate(req: Request, res: Response, next: NextFunction) {
         try {
-            const isDbEmpty = await QRCodeC.showQRCodeHistory();
+            const hasPublicRecords = await QRCodeC.hasPublicHistory();
 
-            if (!isDbEmpty) {
+            if (!hasPublicRecords) {
                 return res.status(400).json({
                     message: QRCODEMSG.ERR.QRCODE_SERVER_HISTORY_EMPTY
                 });

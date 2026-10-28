@@ -3,6 +3,7 @@ import TQRCode from "../types/TQRCode";
 import { v4 as uuidv4 } from "uuid";
 import { mkdir, readFile, rename, writeFile } from "fs/promises";
 import path from "path";
+import { resolveQRCodeImageUrl } from "../utils/qrCodeStorage";
 
 type LocalQRCodeRecord = {
     id: string;
@@ -70,14 +71,15 @@ export default class QRCodeC {
         this.imageUrl = props.imageUrl;
         this.base64 = props.base64 || "";
         this.createdAt = props.createdAt || new Date();
-        this.private = props.private ?? false;
+        this.private = props.private ?? true;
         this.scanCount = props.scanCount ?? 0;
     }
 
     static async create(data: {
         url: string,
         base64: string,
-        imageUrl: string
+        imageUrl: string,
+        private?: boolean
     }) {
         try {
             const qrCode = new QRCodeC({
@@ -86,7 +88,7 @@ export default class QRCodeC {
                 imageUrl:data.imageUrl,
                 base64: data.base64,
                 createdAt: new Date(),
-                private: false,
+                private: data.private ?? true,
                 scanCount: 0
             });
 
@@ -226,14 +228,14 @@ export default class QRCodeC {
     static async showQRCodeHistory() {
         if (isLocalDataStore()) {
             const records = await readLocalQRCodeRecords();
-            return records
+            return Promise.all(records
                 .filter((record) => !record.private)
-                .map(({ url, imageUrl, createdAt, scanCount }) => ({
+                .map(async ({ url, imageUrl, createdAt, scanCount }) => ({
                     url,
-                    imageUrl,
+                    imageUrl: imageUrl ? await resolveQRCodeImageUrl(imageUrl) : imageUrl,
                     createdAt: new Date(createdAt),
                     scanCount
-                }));
+                })));
         }
 
         const history = await prisma.qRCode.findMany({
@@ -247,6 +249,28 @@ export default class QRCodeC {
                 scanCount: true
             }
         });
-        return history;
+
+        return Promise.all(history.map(async (item) => ({
+            ...item,
+            imageUrl: item.imageUrl ? await resolveQRCodeImageUrl(item.imageUrl) : item.imageUrl
+        })));
+    }
+
+    static async hasPublicHistory(): Promise<boolean> {
+        if (isLocalDataStore()) {
+            const records = await readLocalQRCodeRecords();
+            return records.some((record) => !record.private);
+        }
+
+        const record = await prisma.qRCode.findFirst({
+            where: { private: false },
+            select: { id: true }
+        });
+
+        return record !== null;
+    }
+
+    static async getImageUrl(imageReference: string): Promise<string> {
+        return resolveQRCodeImageUrl(imageReference);
     }
 }
