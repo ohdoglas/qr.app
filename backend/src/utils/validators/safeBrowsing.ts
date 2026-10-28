@@ -6,9 +6,11 @@ dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
 
 const API_KEY = process.env.GOOGLE_SAFE_BROWSING_KEY;
 
-console.log(API_KEY);
-
 export async function isMaliciousURL(url: string): Promise<boolean> {
+    if (!API_KEY) {
+        throw new Error("GOOGLE_SAFE_BROWSING_KEY is required when Google Safe Browsing is enabled.");
+    }
+
     try {
         const res = await axios.post(
             `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${API_KEY}`,
@@ -34,7 +36,8 @@ export async function isMaliciousURL(url: string): Promise<boolean> {
         const hasThreats = res.data && Object.keys(res.data).length > 0;
         return hasThreats;
     } catch (error: any) {
-        console.error(`Error while verifying:`, error.response?.data || error.message);
-        return false;
+        const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+        console.error(`Google Safe Browsing request failed${status ? ` (HTTP ${status})` : ""}.`);
+        throw new Error("Google Safe Browsing verification is unavailable.");
     }
 }

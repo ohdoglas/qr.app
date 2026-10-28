@@ -1,6 +1,58 @@
 import prisma from "../config/prisma";
 import TQRCode from "../types/TQRCode";
 import { v4 as uuidv4 } from "uuid";
+import { mkdir, readFile, rename, writeFile } from "fs/promises";
+import path from "path";
+
+type LocalQRCodeRecord = {
+    id: string;
+    url: string;
+    imageUrl?: string;
+    base64: string;
+    createdAt: string;
+    private: boolean;
+    scanCount: number;
+};
+
+const localQRCodeDataPath = path.resolve(__dirname, "../../data/local-qrcodes.json");
+let localWriteQueue: Promise<void> = Promise.resolve();
+
+function isLocalDataStore(): boolean {
+    return (process.env.QR_STORAGE_PROVIDER || "supabase").toLowerCase() === "local";
+}
+
+async function readLocalQRCodeRecords(): Promise<LocalQRCodeRecord[]> {
+    try {
+        const contents = await readFile(localQRCodeDataPath, "utf8");
+        return JSON.parse(contents) as LocalQRCodeRecord[];
+    } catch (error) {
+        if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+            return [];
+        }
+        throw error;
+    }
+}
+
+async function updateLocalQRCodeRecords<T>(
+    update: (records: LocalQRCodeRecord[]) => T | Promise<T>
+): Promise<T> {
+    let release!: () => void;
+    const previousWrite = localWriteQueue;
+    localWriteQueue = new Promise<void>((resolve) => { release = resolve; });
+    await previousWrite;
+
+    try {
+        const records = await readLocalQRCodeRecords();
+        const result = await update(records);
+        await mkdir(path.dirname(localQRCodeDataPath), { recursive: true });
+        const temporaryPath = `${localQRCodeDataPath}.${process.pid}.tmp`;
+        await writeFile(temporaryPath, JSON.stringify(records, null, 2), "utf8");
+        await rename(temporaryPath, localQRCodeDataPath);
+        return result;
+    } finally {
+        release();
+    }
+}
 
 
 export default class QRCodeC {
@@ -38,6 +90,15 @@ export default class QRCodeC {
                 scanCount: 0
             });
 
+            if (isLocalDataStore()) {
+                const record: LocalQRCodeRecord = {
+                    ...qrCode.toJSON(),
+                    createdAt: qrCode.createdAt.toISOString()
+                };
+                await updateLocalQRCodeRecords((records) => { records.push(record); });
+                return { ...record, createdAt: new Date(record.createdAt) };
+            }
+
             const qrCodeData = await prisma.qRCode.create({
                 data: qrCode
             });
@@ -51,6 +112,12 @@ export default class QRCodeC {
 
     static async findByUrl(url: string) {
         try {
+            if (isLocalDataStore()) {
+                const records = await readLocalQRCodeRecords();
+                const found = records.find((record) => record.url === url);
+                return found ? { ...found, createdAt: new Date(found.createdAt) } : false;
+            }
+
             const find = await prisma.qRCode.findFirst({
                 where: { url: url }
                 }
@@ -70,6 +137,11 @@ export default class QRCodeC {
     static async isPrivate(id: string) {
 
         try {
+            if (isLocalDataStore()) {
+                const records = await readLocalQRCodeRecords();
+                return records.find((record) => record.id === id)?.private;
+            }
+
             const state = await prisma.qRCode.findUnique({
                 where:{ id: id},
                 select: { private: true }
@@ -84,6 +156,15 @@ export default class QRCodeC {
 
     static async incrementScanCount(id: string) {
         try {
+            if (isLocalDataStore()) {
+                return updateLocalQRCodeRecords((records) => {
+                    const record = records.find((entry) => entry.id === id);
+                    if (!record) return false;
+                    record.scanCount += 1;
+                    return { ...record, createdAt: new Date(record.createdAt) };
+                });
+            }
+
             const currentCount = await prisma.qRCode.findUnique({
                 where: { id: id},
                 select: { scanCount: true }
@@ -109,6 +190,15 @@ export default class QRCodeC {
 
     static async updateFields(id: string, data: Partial<TQRCode>) {
         try {
+            if (isLocalDataStore()) {
+                return updateLocalQRCodeRecords((records) => {
+                    const record = records.find((entry) => entry.id === id);
+                    if (!record) throw new Error(`QR Code ${id} was not found.`);
+                    Object.assign(record, data, data.createdAt ? { createdAt: data.createdAt.toISOString() } : {});
+                    return { ...record, createdAt: new Date(record.createdAt) };
+                });
+            }
+
             const updateQRCode = await prisma.qRCode.update({
                 where: { id: id },
                 data,
@@ -134,6 +224,18 @@ export default class QRCodeC {
     }
 
     static async showQRCodeHistory() {
+        if (isLocalDataStore()) {
+            const records = await readLocalQRCodeRecords();
+            return records
+                .filter((record) => !record.private)
+                .map(({ url, imageUrl, createdAt, scanCount }) => ({
+                    url,
+                    imageUrl,
+                    createdAt: new Date(createdAt),
+                    scanCount
+                }));
+        }
+
         const history = await prisma.qRCode.findMany({
             where: {
                 private: false

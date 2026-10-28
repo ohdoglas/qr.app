@@ -1,0 +1,15 @@
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Provider-specific local configuration
+.vercel
+
+# Generated outputs
+**/node_modules/
+**/dist/
+**/.vite/
+**/*.tsbuildinfo
+backend/data/
+backend/uploads/qrcodes/

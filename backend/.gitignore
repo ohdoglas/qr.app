@@ -138,3 +138,6 @@ dist
 
 #prisma client data
 /data
+
+# Locally generated QR Code images
+/uploads/qrcodes/

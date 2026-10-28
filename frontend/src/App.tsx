@@ -5,6 +5,7 @@ import Generator from "./pages/public/Generator";
 import NotFound from "./pages/public/NotFound";
 import About from "./pages/public/About";
 import History from "./pages/public/History";
+import Templates from "./pages/public/Templates";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
           <Route>
             <Route path="/" element={<Home />} />
             <Route path="/generator" element={<Generator />} />
+            <Route path="/templates" element={<Templates />} />
             <Route path="/about" element={<About />} />
             <Route path="/history" element={<History />} />
             <Route path="*" element={<NotFound />}/>

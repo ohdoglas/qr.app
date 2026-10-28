@@ -1,7 +1,3 @@
-@import url(../../reset.css);
-@import url(../../global.css);
-@import url(../../variables.css);
-
 html {
     height: 100dvh;
     margin: 0;

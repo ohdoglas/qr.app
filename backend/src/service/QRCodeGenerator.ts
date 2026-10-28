@@ -1,7 +1,6 @@
 import QRCode  from "qrcode";
 import QRCodeC, { } from "../models/QRCode"
-import { imgUp } from "../utils/imgUpload";
-import supabase from "../config/supabase";
+import { storeQRCode } from "../utils/qrCodeStorage";
 
 const options: QRCode.QRCodeToDataURLOptionsOther = {
     errorCorrectionLevel: 'H',
@@ -23,20 +22,12 @@ export default class QRCodeService {
             const buffer = Buffer.from(base64Data, "base64");
 
             const fileName = `QRCode_${Date.now()}.png`;
-            const uploadPath = `QRCodeImage/${fileName}`;
-
-            const uploadedImg = await imgUp(uploadPath, buffer, "image/png");
-
-            if (!uploadedImg) {
-                throw new Error("Error while updating image on supabase bucket.");
-            };
-
-            const { data } = supabase.storage.from("qrappqrcodes").getPublicUrl(uploadedImg.path);
+            const imageUrl = await storeQRCode(fileName, buffer);
 
             const qrCodeData = {
                 url,
                 base64: QRResponse,
-                imageUrl: data.publicUrl
+                imageUrl
             };
 
             const  savedQrCode = await QRCodeC.create(qrCodeData);

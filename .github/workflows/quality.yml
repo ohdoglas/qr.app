@@ -1,0 +1,52 @@
+name: QR.APP quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    name: Frontend lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: frontend
+      - name: Lint
+        run: npm run lint
+        working-directory: frontend
+      - name: Build
+        run: npm run build
+        working-directory: frontend
+
+  backend:
+    name: Backend TypeScript build
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@127.0.0.1:5432/qrapp_ci?schema=public
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: backend
+      - name: Build
+        run: npm run build
+        working-directory: backend

@@ -59,11 +59,13 @@ export default class QRCodeGenMiddleware {
                 });
             };
 
-            const isNotSafeBrowsing = await isMaliciousURL(url);
-            if (isNotSafeBrowsing) {
-                return res.status(403).json({
-                    message: QRCODEMSG.ERR.MALICIOUS_BY_SAFE_BROWSING
-                });
+            if (process.env.GOOGLE_SAFE_BROWSING_ENABLED !== "false") {
+                const isNotSafeBrowsing = await isMaliciousURL(url);
+                if (isNotSafeBrowsing) {
+                    return res.status(403).json({
+                        message: QRCODEMSG.ERR.MALICIOUS_BY_SAFE_BROWSING
+                    });
+                }
             }
 
             next();

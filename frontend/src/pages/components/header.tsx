@@ -1,25 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../../css/components/header.css"
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useLanguage } from "../../i18n/useLanguage";
+import type { TranslationKey } from "../../i18n/translations";
+import "../../css/components/header.css";
 
-const Header: React.FC = () => {
+const navigationItems: Array<{ to: string; label: TranslationKey; end: boolean }> = [
+    { to: "/", label: "header.home", end: true },
+    { to: "/generator", label: "header.generator", end: false },
+    { to: "/templates", label: "header.templates", end: false },
+    { to: "/history", label: "header.history", end: false },
+    { to: "/about", label: "header.about", end: false },
+];
+
+const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { language, setLanguage, t } = useLanguage();
+
     return (
-        <header className="header">
-            <nav className="header_nav">
-                <div className="header_nav_logo">
-                <Link to={"/"}><div className="header_nav_logo_img"></div></Link>
+        <header className="site-header">
+            <div className="site-header-inner">
+                <Link className="site-brand" to="/" aria-label={t("header.brandHome")}>
+                    <span className="site-brand-mark" aria-hidden="true">QR</span>
+                    <span className="site-brand-name">QR.APP</span>
+                </Link>
+
+                <div className="site-header-actions">
+                    <nav
+                        className={`site-navigation${isMenuOpen ? " is-open" : ""}`}
+                        id="site-navigation"
+                        aria-label={t("header.mainNavigation")}
+                    >
+                        {navigationItems.map(({ to, label, end }) => (
+                            <NavLink
+                                key={to}
+                                to={to}
+                                end={end}
+                                className={({ isActive }) => `site-navigation-link${isActive ? " is-active" : ""}`}
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {t(label)}
+                            </NavLink>
+                        ))}
+                    </nav>
+                    <label className="site-language-control">
+                        <span className="visually-hidden">{t("header.language")}</span>
+                        <select
+                            aria-label={t("header.language")}
+                            value={language}
+                            onChange={(event) => setLanguage(event.target.value as "en" | "pt")}
+                        >
+                            <option value="pt">Português</option>
+                            <option value="en">English</option>
+                        </select>
+                    </label>
+                    <button
+                        className="site-menu-toggle"
+                        type="button"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="site-navigation"
+                        onClick={() => setIsMenuOpen((open) => !open)}
+                    >
+                        <span className="site-menu-icon" aria-hidden="true" />
+                        <span className="site-menu-label">{isMenuOpen ? t("header.closeMenu") : t("header.menu")}</span>
+                    </button>
                 </div>
-                <div className="header_nav_buttons">
-                <Link to={"/generator"}> <button className="header_nav_gen_button">
-                    GENERATE</button> </Link>
-                    <Link to={"/about"}> <button className="header_nav_about_button">
-                    ABOUT</button> </Link>
-                    <Link to={"/history"}> <button className="header_nav_about_button">
-                    HISTORY</button> </Link>
             </div>
-            </nav>
         </header>
-    )
-}
+    );
+};
 
 export default Header;

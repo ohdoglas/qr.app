@@ -1,9 +1,19 @@
 import "dotenv/config";
 import { createClient } from "@supabase/supabase-js";
 
-const supaURL = process.env.supabaseURL || "";
-const supaKey = process.env.supabaseKey || "";
+let supabaseClient: ReturnType<typeof createClient> | undefined;
 
-const supabase = createClient(supaURL, supaKey);
+export default function getSupabaseClient() {
+    if (!supabaseClient) {
+        const supaURL = process.env.supabaseURL;
+        const supaKey = process.env.supabaseKey;
 
-export default supabase;
+        if (!supaURL || !supaKey) {
+            throw new Error("supabaseURL and supabaseKey are required when QR_STORAGE_PROVIDER=supabase.");
+        }
+
+        supabaseClient = createClient(supaURL, supaKey);
+    }
+
+    return supabaseClient;
+}

@@ -1,113 +1,92 @@
-import React from "react";
-import Footer from "../components/footer";
 import Header from "../components/header";
-import "../../css/styles/public/About.css"
+import Footer from "../components/footer";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../../i18n/useLanguage";
+import "../../css/styles/public/About.css";
 
+const About = () => {
+    const { t } = useLanguage();
 
-const About: React.FC = () => {
     return (
-        <main className="about_main">
+        <div className="about-page">
             <Header />
-            <div className="about_main_content">
-            <section className="about_main_section">
-                <article>
-                    <div className="about_text">
-                        <h1>
-                        About QRApp
-                        </h1>
-                        <p>
-                        QRApp is a lightweight, open-source tool that allows anyone to generate QR Codes in a matter of seconds — without registration, without tracking, and without ads.
-                        Whether you're a developer, a small business owner, or just someone who wants to quickly share a link, QRApp was built to offer speed, simplicity, and privacy.
-                        </p>
+            <main className="about-main">
+                <section className="about-hero" aria-labelledby="about-title">
+                    <p className="about-eyebrow">{t("about.eyebrow")}</p>
+                    <h1 id="about-title">{t("about.title")}</h1>
+                    <p className="about-lead">{t("about.intro")}</p>
+                    <div className="about-hero-actions">
+                        <Link className="about-primary-action" to="/generator">{t("about.openGenerator")} <span aria-hidden="true">→</span></Link>
+                        <Link className="about-secondary-action" to="/templates">{t("about.browse")}</Link>
                     </div>
-                    <div className="about_qr_app_img"></div>
-                </article>
+                    <ul className="about-facts" aria-label={t("about.characteristics")}>
+                        <li><span aria-hidden="true">✓</span> {t("about.runsLocal")}</li>
+                        <li><span aria-hidden="true">✓</span> {t("about.noAccount")}</li>
+                        <li><span aria-hidden="true">✓</span> {t("about.static")}</li>
+                    </ul>
+                </section>
 
-                <article>
-                    <div className="what_qrcodes">
-                    <h1>
-                        What are QR Codes?
-                    </h1>
-                    <p>
-                        QR (Quick Response) Codes are two-dimensional barcodes that can store URLs, contact information, Wi-Fi credentials, and more. They’re widely used for sharing content easily via smartphone cameras — no typing needed.
-                        QRApp helps you create high-quality QR codes instantly for any valid URL.
-                    </p>
+                <section className="about-section" aria-labelledby="about-static-title">
+                    <div className="about-section-heading">
+                        <p className="about-kicker">{t("about.basics")}</p>
+                        <h2 id="about-static-title">{t("about.staticTitle")}</h2>
+                        <p>{t("about.staticText")}</p>
                     </div>
-                    <div className="what_qrcodes_img"></div>
-                </article>
-
-                <article>
-                    <div className="how_it_works">
-                    <h1>
-                        How does QRApp work?
-                    </h1>
-                    <p>
-                        You just enter a link, choose if your QR Code should be public or private, and click generate. That’s it.
-
-                        Public codes are shown in the public history page and can be discovered by anyone.
-
-                        Private codes are hidden from public view and only accessible by their direct link.
-
-                        After generation, you’ll get a preview of your QR Code and options to download or share it.
-                    </p>
+                    <div className="about-step-grid">
+                        <article className="about-step-card">
+                            <span className="about-step-number">01</span>
+                            <h3>{t("about.chooseFormat")}</h3>
+                            <p>{t("about.chooseFormatText")}</p>
+                        </article>
+                        <article className="about-step-card">
+                            <span className="about-step-number">02</span>
+                            <h3>{t("about.enterContent")}</h3>
+                            <p>{t("about.enterContentText")}</p>
+                        </article>
+                        <article className="about-step-card">
+                            <span className="about-step-number">03</span>
+                            <h3>{t("about.previewExport")}</h3>
+                            <p>{t("about.previewExportText")}</p>
+                        </article>
                     </div>
-                    <div className="how_it_works_img"></div>
+                </section>
 
-                </article>
-                    <div className="tech_stack">
-                    <h1>
-                        Tech Stack
-                    </h1>
-                    <p>
-                        QRApp is made for developers, by developers – and here's what’s under the hood: <br />
-
-                    </p>
-                    <p>
-                    Backend: <br />
-                        - Express <br />
-
-                        - TypeScript <br />
-
-                        - Prisma ORM <br />
-
-                        - Supabase Storage <br />
-
-                        - PostgreSQL <br />
-
-                        - QRCode.js <br />
-                    </p>
-                    <p>
-                        Frontend: <br />
-                        - React <br />
-
-                        - Vite <br />
-
-                        - React Router <br />
-
-                        - TypeScript <br />
-                    </p>
+                <section className="about-privacy-section" aria-labelledby="about-privacy-title">
+                    <div>
+                        <p className="about-kicker">{t("about.privacyEyebrow")}</p>
+                        <h2 id="about-privacy-title">{t("about.privacyTitle")}</h2>
+                        <p>{t("about.privacyIntro")}</p>
                     </div>
-
-                <article>
-                    <div className="built_speed">
-                    <h1>
-                        Built for transparency and speed
-                    </h1>
-                    <p>
-                    We believe that tools should serve users, not harvest their data. QRApp is fully open source, and all the code is available on GitHub.
-
-                    Whether you want to use it, fork it, or contribute, you’re welcome!
-                    </p>
+                    <div className="about-privacy-cards">
+                        <article>
+                            <h3>{t("about.generator")}</h3>
+                            <p>{t("about.generatorPrivacy")}</p>
+                        </article>
+                        <article>
+                            <h3>{t("about.publicHistory")}</h3>
+                            <p>{t("about.historyPrivacy")}</p>
+                        </article>
+                        <article>
+                            <h3>{t("about.sharedContent")}</h3>
+                            <p>{t("about.sharedContentText")}</p>
+                        </article>
                     </div>
-                    <div className="built_speed_img"></div>
-                </article>
-            </section>
+                </section>
 
-            <div className="about_img"></div>
-            </div>
+                <section className="about-stack-section" aria-labelledby="about-stack-title">
+                    <div>
+                        <p className="about-kicker">{t("about.stackEyebrow")}</p>
+                        <h2 id="about-stack-title">{t("about.stackTitle")}</h2>
+                        <p>{t("about.stackText")}</p>
+                    </div>
+                    <a className="about-source-link" href="https://github.com/ohdoglas/qr.app" target="_blank" rel="noopener noreferrer">
+                        {t("about.source")} <span aria-hidden="true">↗</span>
+                    </a>
+                </section>
+            </main>
             <Footer />
-        </main>
-    )
-}
+        </div>
+    );
+};
 
 export default About;
