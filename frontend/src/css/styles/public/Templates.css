@@ -1,6 +1,6 @@
 .templates-page {
     min-height: 100vh;
-    background: #f5f7fc;
+    background: var(--qr-page-background);
     color: #14213a;
 }
 

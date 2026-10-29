@@ -28,20 +28,10 @@
     white-space: nowrap;
 }
 
-.site-brand-mark {
-    display: inline-grid;
-    width: 36px;
-    height: 36px;
-    place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--qr-brand-violet), var(--qr-brand-blue));
-    color: #fff;
-    font-size: 0.72rem;
-    letter-spacing: -0.04em;
-}
-
-.site-brand-name { font-size: 1.05rem; }
+.qrapp-logo { display: inline-flex; min-height: 40px; align-items: center; gap: 10px; color: inherit; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; }
+.qrapp-logo-symbol { display: block; width: 36px; height: 36px; flex: 0 0 auto; filter: drop-shadow(0 3px 8px rgba(76, 91, 200, 0.2)); }
+.qrapp-logo-wordmark { font-size: 1.05rem; }
+.home-hero-brand { margin-bottom: 30px; }
 
 .site-navigation {
     display: flex;
@@ -148,7 +138,9 @@
 @media (max-width: 360px) {
     .site-header-inner { width: calc(100% - 20px); }
     .site-brand { gap: 7px; }
-    .site-brand-name { font-size: 0.96rem; }
+    .qrapp-logo { gap: 7px; }
+    .qrapp-logo-symbol { width: 36px; height: 36px; }
+    .qrapp-logo-wordmark { font-size: 0.96rem; }
     .site-language-control select { padding-right: 22px; }
 }
 

@@ -2,6 +2,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../i18n/useLanguage";
+import BrandLogo from "../components/BrandLogo";
 import "../../css/styles/public/Home.css";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
                 <section className="home-hero" aria-labelledby="home-title">
                     <div className="home-hero-inner">
                         <div className="home-hero-copy">
+                            <BrandLogo className="home-hero-brand" />
                             <p className="home-eyebrow"><span aria-hidden="true" /> {t("home.eyebrow")}</p>
                             <h1 id="home-title">{t("home.titleStart")} <span>{t("home.titleEnd")}</span></h1>
                             <p className="home-intro">{t("home.intro")}</p>

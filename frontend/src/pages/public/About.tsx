@@ -63,8 +63,8 @@ const About = () => {
                             <p>{t("about.generatorPrivacy")}</p>
                         </article>
                         <article>
-                            <h3>{t("about.publicHistory")}</h3>
-                            <p>{t("about.historyPrivacy")}</p>
+                            <h3>{t("about.localGeneration")}</h3>
+                            <p>{t("about.localGenerationPrivacy")}</p>
                         </article>
                         <article>
                             <h3>{t("about.sharedContent")}</h3>

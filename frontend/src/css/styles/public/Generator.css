@@ -1,6 +1,6 @@
 .generator-page {
     min-height: 100vh;
-    background: #f5f7fc;
+    background: var(--qr-page-background);
     color: #14213a;
 }
 
@@ -127,7 +127,7 @@
 }
 
 .generator-field { display: flex; min-width: 0; flex-direction: column; }
-.generator-field + .generator-field { margin-top: 10px; }
+.generator-contextual-fields > .generator-field + .generator-field { margin-top: 10px; }
 .generator-field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 
 .generator-form input,

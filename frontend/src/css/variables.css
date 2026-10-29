@@ -17,6 +17,7 @@
     --qr-muted-dark: #aebdd2;
 
     --qr-canvas-light: #f5f7fc;
+    --qr-page-background: radial-gradient(ellipse at 12% 8%, rgba(116, 71, 255, 0.055), transparent 32rem) no-repeat, radial-gradient(ellipse at 92% 44%, rgba(35, 139, 255, 0.05), transparent 34rem) no-repeat, url("../assets/page-ambient.svg") repeat, #f5f7fc;
     --qr-surface-light: #ffffff;
     --qr-border-light: #e0e6f2;
     --qr-text-light: #14213a;

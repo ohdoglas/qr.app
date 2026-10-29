@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <pattern id="modules" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M1 1h2v2H1zM21 21h2v2h-2z" fill="#6579aa" fill-opacity=".16"/>
+      <path d="M20 0v40M0 20h40" stroke="#6579aa" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+  <path fill="url(#modules)" d="M0 0h240v240H0z"/>
+</svg>

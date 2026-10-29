@@ -176,7 +176,7 @@
 
 .home-how {
     padding: 92px max(24px, calc((100% - var(--qr-container)) / 2)) 96px;
-    background: #f5f7fc;
+    background: var(--qr-page-background);
     color: var(--qr-text-light);
 }
 .home-section-heading { max-width: 700px; margin: 0 auto 40px; text-align: center; }
@@ -193,7 +193,7 @@
 .home-step-card h3 { margin-top: 18px; font-size: 1.08rem; letter-spacing: -0.015em; }
 .home-step-card p { margin-top: 8px; color: #52637c; font-size: 0.92rem; line-height: 1.65; }
 
-.home-format { padding: 0 24px 72px; background: #f5f7fc; color: var(--qr-text-light); }
+.home-format { padding: 0 24px 72px; background: var(--qr-page-background); color: var(--qr-text-light); }
 .home-format-inner { display: flex; max-width: var(--qr-container); align-items: center; justify-content: space-between; gap: 30px; margin: 0 auto; padding: 30px 34px; border: 1px solid #dce5f3; border-radius: var(--qr-radius-lg); background: linear-gradient(115deg, #eef1ff, #f1f8ff); }
 .home-format h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
 .home-format-inner > div > p:last-child { max-width: 680px; margin-top: 10px; color: #52637c; line-height: 1.65; }

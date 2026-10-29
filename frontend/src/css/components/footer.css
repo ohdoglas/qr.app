@@ -1,5 +1,5 @@
 .site-footer {
-    margin-top: 56px;
+    margin-top: 32px;
     background: var(--qr-canvas-dark);
     color: var(--qr-text-dark);
 }
@@ -7,26 +7,22 @@
 .site-footer-inner {
     display: grid;
     width: min(var(--qr-container), calc(100% - 40px));
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 14px 32px;
+    gap: 14px 28px;
     margin: 0 auto;
-    padding: 28px 0;
+    padding: 20px 0 16px;
 }
 
-.site-footer-brand {
+.site-footer-brand-group {
     display: flex;
+    min-width: 0;
     align-items: center;
-    gap: 10px;
-    font-weight: 800;
+    gap: 22px;
 }
 
-.site-footer-brand .site-brand-mark {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    font-size: 0.65rem;
-}
+.site-footer-brand .qrapp-logo-symbol { width: 32px; height: 32px; }
+.site-footer-brand .qrapp-logo-wordmark { font-size: 0.98rem; }
 
 .site-footer-description,
 .site-footer-meta {
@@ -42,6 +38,8 @@
     gap: 8px 20px;
 }
 
+.site-footer-description { max-width: 48ch; margin: 0; }
+
 .site-footer-links a {
     display: inline-flex;
     min-height: 44px;
@@ -51,15 +49,17 @@
 }
 
 .site-footer-links a:hover { color: var(--qr-text-dark); }
-.site-footer-meta { grid-column: 1 / -1; }
+.site-footer-meta { grid-column: 1 / -1; margin: 0; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
 
 @media (max-width: 640px) {
-    .site-footer { margin-top: 36px; }
+    .site-footer { margin-top: 24px; }
     .site-footer-inner {
         width: min(var(--qr-container), calc(100% - 28px));
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
+        padding: 18px 0 14px;
     }
+    .site-footer-brand-group { align-items: flex-start; flex-direction: column; gap: 6px; }
     .site-footer-links { justify-content: flex-start; gap: 4px 14px; }
     .site-footer-meta { grid-column: auto; margin-top: 4px; }
 }

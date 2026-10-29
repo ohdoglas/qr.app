@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useLanguage } from "../../i18n/useLanguage";
 import type { TranslationKey } from "../../i18n/translations";
+import BrandLogo from "./BrandLogo";
 import "../../css/components/header.css";
 
 const navigationItems: Array<{ to: string; label: TranslationKey; end: boolean }> = [
     { to: "/", label: "header.home", end: true },
     { to: "/generator", label: "header.generator", end: false },
     { to: "/templates", label: "header.templates", end: false },
-    { to: "/history", label: "header.history", end: false },
     { to: "/about", label: "header.about", end: false },
 ];
 
@@ -20,8 +20,7 @@ const Header = () => {
         <header className="site-header">
             <div className="site-header-inner">
                 <Link className="site-brand" to="/" aria-label={t("header.brandHome")}>
-                    <span className="site-brand-mark" aria-hidden="true">QR</span>
-                    <span className="site-brand-name">QR.APP</span>
+                    <BrandLogo />
                 </Link>
 
                 <div className="site-header-actions">

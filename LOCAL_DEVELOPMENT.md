@@ -1,52 +1,33 @@
-# Desenvolvimento local
+# Desenvolvimento local do QR.APP 2.0
 
-O fluxo do gerador `/generator` produz o QR Code no frontend. O backend permanece útil para a rota `/history` e para exercitar a API antiga, usando arquivos locais no modo de desenvolvimento. Nenhuma credencial Supabase é necessária no modo `local`.
+O QR.APP 2.0 é um frontend estático. A geração, pré-visualização e exportação de QR Codes acontecem no navegador. Não é necessário iniciar backend, banco de dados, Supabase ou configurar variáveis de ambiente.
 
 ## Requisitos
 
-- Node.js compatível com Vite 6 (Node 20.19+ ou 22.12+ recomendado).
+- Node.js 20.19+ ou 22.12+.
 - npm.
 
-## Configurar pela primeira vez (PowerShell)
+## Instalar e iniciar
 
-```powershell
-cd C:\Users\multivac\Desktop\Git\qr.app
-Copy-Item backend\.env.example backend\.env
-Copy-Item frontend\.env.example frontend\.env
-cd backend
-npm ci
-cd ..\frontend
-npm ci
-```
-
-Se os arquivos `.env` já existem, preserve-os e apenas confira que `QR_STORAGE_PROVIDER=local`, `GOOGLE_SAFE_BROWSING_ENABLED=false` e `VITE_API_URL=http://127.0.0.1:3000`. Não use configuração de produção para desenvolvimento local.
-
-## Iniciar backend e frontend
-
-Abra dois terminais PowerShell.
-
-Terminal 1:
-
-```powershell
-cd C:\Users\multivac\Desktop\Git\qr.app\backend
-npm run dev
-```
-
-Terminal 2:
+No PowerShell:
 
 ```powershell
 cd C:\Users\multivac\Desktop\Git\qr.app\frontend
+npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Abra `http://127.0.0.1:5173/generator`. O gerador de URL no browser funciona sem o backend; o backend em `http://127.0.0.1:3000` é usado pelo histórico legado.
+Abra `http://127.0.0.1:5173`. As rotas disponíveis são `/`, `/generator`, `/templates` e `/about`.
 
-## Dados locais e teste manual
+Para validar uma build local:
 
-- Imagens da API: `backend/uploads/qrcodes/`.
-- Registros da API: `backend/data/local-qrcodes.json`.
-- Os diretórios de dados locais são ignorados pelo Git. Removê-los apaga os dados de teste.
-- Para testar a tela principal: informar uma URL HTTP/HTTPS completa, gerar, conferir a prévia e baixar o PNG. Ler o arquivo baixado com câmera ou leitor de QR independente.
-- Para testar a API legada: enviar `POST http://127.0.0.1:3000/qrcode-generator` com JSON `{"url":"https://example.com","isPrivate":false}`; consultar `GET http://127.0.0.1:3000/history`.
+```powershell
+npm run lint
+npm run build
+```
 
-Os testes acima não acessam Supabase. A configuração remota só deve ser habilitada em etapa posterior, com revisão separada das políticas de acesso e variáveis do servidor.
+## Privacidade e legado
+
+O gerador não transmite o conteúdo inserido nem mantém histórico no servidor. Os dados que formam o QR Code permanecem na página até ela ser fechada ou atualizada.
+
+A implementação anterior completa permanece na branch `legacy/qr-app-v1`. Este checkout ainda contém arquivos de backend para a transição, mas o app desta branch monta somente `/healthz`; o frontend não chama a API. O backend configurado para a produção atual não é necessário para executar esta versão. A branch `main` e os dados remotos não são alterados por estes comandos.
